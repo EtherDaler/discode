@@ -1,0 +1,137 @@
+{% extends "client/wrapper.html" %}
+
+{% load static %}
+
+{% block title %}Website title - bootstrap html template{% endblock %}
+
+{% block content %}
+<section class="py-3 bg-light">
+  <div class="container">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">{{getDiscountInfo.category}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{getDiscountInfo.name}}</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg-white padding-y">
+<div class="container">
+
+<!-- ============================ ITEM DETAIL ======================== -->
+	<div class="row">
+		<aside class="col-md-6">
+<div class="card">
+<article class="gallery-wrap"> 
+	<div class="img-big-wrap">
+	  <div> <a href="#"><img src="{{getDiscountInfo.images.first.image.url}}"></a></div>
+	</div> <!-- slider-product.// -->
+	<div class="thumbs-wrap">
+    {% for image in getDiscountInfo.images.all %}
+	  <a href="#" class="item-thumb"> <img src="{{image.image.url}}"></a>
+    {% endfor %}
+	</div> <!-- slider-nav.// -->
+</article> <!-- gallery-wrap .end// -->
+</div> <!-- card.// -->
+		</aside>
+		<main class="col-md-6">
+<article class="product-info-aside">
+
+<h2 class="title mt-3">{{getDiscountInfo.name}}</h2>
+
+<div class="rating-wrap my-3">
+	<ul class="rating-stars">
+		<li style="width:80%" class="stars-active"> 
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+			<i class="fa fa-star"></i> 
+		</li>
+		<li>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+			<i class="fa fa-star"></i> 
+		</li>
+	</ul>
+	<small class="label-rating text-muted"><i class="fa fa-eye"></i> {{getDiscountInfo.watch}} просмотров</small>
+</div> <!-- rating-wrap.// -->
+
+<div class="mb-3"> 
+	<var class="price h4">Размер скидки: {{getDiscountInfo.discount}}%</var> 
+</div> <!-- price-detail-wrap .// -->
+
+<p>{{getDiscountInfo.body}}</p>
+
+
+<dl class="row">
+  <dt class="col-sm-3">Категория:</dt>
+  <dd class="col-sm-9"><a href="#">{{getDiscountInfo.category}}</a></dd>
+
+  <dt class="col-sm-3">Номера:</dt>
+  <dd class="col-sm-9"><a href="tel:{{getDiscountInfo.partner.phone}}">{{getDiscountInfo.partner.phone}}</a>
+    {% for another_phone in getDiscountInfo.partner.another_phones.all %}
+      | <a href="tel:{{another_phone.phone}}">{{another_phone.phone}}</a>
+    {% endfor %}
+  </dd>
+
+  <dt class="col-sm-3">Email</dt>
+  <dd class="col-sm-9"><a href="mailto:{{getDiscountInfo.partner.email}}">{{getDiscountInfo.partner.email}}</a></dd>
+
+  <dt class="col-sm-3">Веб-сайт:</dt>
+  <dd class="col-sm-9"><a href="{{getDiscountInfo.partner.link}}">{{getDiscountInfo.partner.link}}</a></dd>
+
+  <dt class="col-sm-3">Адресс:</dt>
+  <dd class="col-sm-9">{{getDiscountInfo.partner.adress}}
+    {% for felial in getDiscountInfo.partner.felials.all %}
+      | {{felial.adress}}
+    {% endfor %}
+  </dd>
+
+  <dt class="col-sm-3">Действует до:</dt>
+  <dd class="col-sm-9">{{getDiscountInfo.date_of_finish}}</dd>
+</dl>
+<br><br>
+{% if getDiscountInfo.products.all.count > 0 %}
+<div class="col-md-8">
+    <h5>Товары, на которые распространяется скидка:</h5>
+    <ul class="list-check">
+    {% for product in getDiscountInfo.products.all %}
+    <li>{{product.product}}</li>
+    {% endfor %}
+    </ul>
+</div> <!-- col.// -->
+{% endif %}
+
+{% if request.user.can_use == True %}
+<div class="row">
+	<div class="form-row  mt-4">
+		<div class="form-group col-md">
+			<a href="#"  class="btn  btn-primary"> 
+				<i class="fas fa-plus"></i> <span class="text">Активировать скидку</span> 
+			</a>
+		</div> <!-- col.// -->
+	</div> <!-- row.// -->
+{% endif %}
+
+</article> <!-- product-info-aside .// -->
+		</main> <!-- col.// -->
+	</div> <!-- row.// -->
+
+<!-- ================ ITEM DETAIL END .// ================= -->
+
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y bg">
+<div class="container">
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
+
+

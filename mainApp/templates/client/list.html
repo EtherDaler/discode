@@ -1,0 +1,66 @@
+{% extends to "client/wrapper.html" %}
+
+{% block title %}Список скидок{% endblock %}
+
+{% block content %}
+	<form class="form-inline my-2 my-lg-0" >
+            <div id='custom-select-status' class='hidden-visually' aria-live="polite"></div>
+                <div class="" id="myCustomSelect">
+            <input style="border-radius: 12px" autocomplete="off" class="form-control mr-sm-2 " id="search" aria-describedby="custom-select-info" list="search" type="text" placeholder="Что ищем?" aria-label="Search" name="search" style="" />
+                    
+            <ul class="custom-select-options discount " id="custom-select-list" style="width: 300px; border-top: 0px; border-bottom: 0px ">
+                {% for i in searchDiscounts %}
+                	<li class="hidden-all" style="border-top: 1px; border-bottom: 1px solid #aaa; opacity: 0.8">{{i.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+            <button style="border-radius: 12px" class="btn btn-success my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+
+    <script>
+        let city = document.querySelector('.discount');
+        document.querySelector('#search').oninput = function(){
+            let val = this.value;
+            let elasticItems = document.querySelectorAll('.discount li');
+            function same(elem){
+                elem.classList.add('hidden-all');
+                elem.classList.remove('visibility');
+                city.classList.remove('hidden-all');
+            }
+            if(val != ''){
+                elasticItems.forEach(function(elem){
+                    if(elem.innerText.search(val) == -1){
+                        same(elem);
+                    }
+                    else{
+                        elem.classList.remove('hidden-all');
+                        elem.classList.add('visibility');
+                        if(elem in elasticItems.slice(0,elem.index)){
+                            elem.classList.add('hidden-all');
+                        }
+                        var fields = document.querySelectorAll('.visibility');
+                        for(var fld in fields){
+                            if(fld>10){
+                                felds[fld].classList.add('hidden-all');
+                            }
+                        }
+                    }
+                });
+            }
+            else{
+                elasticItems.forEach(function(elem){
+                     same(elem);
+                 });
+            }
+        }
+
+        let items = document.querySelectorAll('.discount li');
+        let search1 = document.querySelector('#search');
+        items.forEach(function(item){
+            item.onclick = () =>{
+                search1.value = item.textContent;
+                city.classList.add('hidden-all');
+            }
+        });
+    </script>
+{% endblock %}

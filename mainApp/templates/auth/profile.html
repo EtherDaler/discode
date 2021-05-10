@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<style type="text/css">
+		.message{
+		    background: grey; 
+		    padding: 10px
+		}
+		.message span{
+		    color: white;
+		    text-align: center;
+		    font-size: 15px;
+		}
+	</style>
+</head>
+<body>
+	<a href="/">to main page</a>
+	<form method="post" name="form">
+		{% csrf_token %}
+		{% for i in form %}
+			{{i}}
+		{% endfor %}
+		<input type="submit" name="">
+	</form>
+	{% for message in messages %}
+		<div class="message">
+			<span>{{message}}</span>
+		</div>
+	{% endfor %}
+</body>
+</html>
