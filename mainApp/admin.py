@@ -38,7 +38,33 @@ class DiscountsAdmin(admin.ModelAdmin):
 
 admin.site.register(Discounts, DiscountsAdmin)
 
-class RequestsAdmin(admin.ModelAdmin):
-	search_fields = ['company_name', 'owner']
-	list_filter = ['date_of_create']
+class EventsAdmin(admin.ModelAdmin):
+    list_filter = ['active']
+
+admin.site.register(Events, EventsAdmin)
+
+class CommentsAdmin(admin.ModelAdmin):
+    list_filter = ['date', 'active', 'rating']
+    search_fields = ['text']
+
+admin.site.register(Comments, CommentsAdmin)
+
+class BlogAdmin(admin.ModelAdmin):
+    list_filter = ['date']
+    search_fields = ['title']
+
+admin.site.register(Blog, BlogAdmin)
+
+class NewsletterAdmin(admin.ModelAdmin):
+	list_filter = ['date']
+	search_fields = ['email']
+
+admin.site.register(Newsletter, NewsletterAdmin)
+
+class NewsAdmin(admin.ModelAdmin):
+	list_filter = ['date']
+	search_fields = ['title']
+
+admin.site.register(News, NewsAdmin)
+
 

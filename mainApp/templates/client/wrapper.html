@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--NEW-->
 	<title>{% block title %}{% endblock %}</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,9 +20,12 @@
 
 	<!-- Bootstrap4 files-->
 	<script src="{% static 'mainApp/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 	<link href="{% static 'mainApp/css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
 	<link href="{% static 'mainApp/css/list.css' %}" rel="stylesheet" type="text/css"/>
 	<link href="{% static 'mainApp/css/main.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
 
 
 	<!-- Font awesome 5 -->
@@ -35,6 +39,41 @@
 	<script src="{% static 'mainApp/js/script.js' %}" type="text/javascript"></script>
 </head>
 <body style="overflow-x: hidden;">
+<style>
+
+    .grid {
+         display: flex;
+         flex-wrap: wrap;
+    }
+     .wrapper {
+         width: calc(100%);
+         margin: 2px;
+    }
+     .padded-container {
+         height: 0;
+         position: relative;
+         overflow: hidden;
+         padding-bottom: 100%;
+    }
+     .padded-container1 {
+         height: 0;
+         position: relative;
+         overflow: hidden;
+         padding-bottom: 99.0625%;
+    }
+     .img {
+         width: 100%;
+         height: auto;
+    }
+     .centered {
+         position: absolute;
+         top: -50%;
+         left: -50%;
+         right: -50%;
+         bottom: -50%;
+         margin: auto;
+    }
+</style>
 
 	<!-- TOP of the PAGE -->
 	<section class="header-main border-bottom">
@@ -46,10 +85,9 @@
 					</a> <!-- brand-wrap.// -->
 				</div>
 				<div class="col-xl-6 col-lg-5 col-md-6">
-					<form action="#" class="search-header">
+					<form action="" class="search-header">
 						<div class="input-group w-100">
-						    <input type="text" class="form-control" placeholder="Search">
-						    
+						    <input type="text" autocomplete="off" aria-describedby="custom-select-info" class="form-control" placeholder="Search" id="search" name="search">
 						    <div class="input-group-append">
 						      <button class="btn btn-primary" type="submit">
 						        <i class="fa fa-search"></i> Search
@@ -132,7 +170,7 @@
 	           <a class="nav-link" href="#">Оформить подписку</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Все предложения</a>
+	          <a class="nav-link" href="{% url 'list_discounts' %}">Все предложения</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="#">Стать партнером</a>
@@ -275,6 +313,6 @@
 		var langEl = document.querySelector(".lang")
 		var a = langEl.href
 	</script>
-
+    <script src="http://twitter.github.com/hogan.js/builds/3.0.1/hogan-3.0.1.js"></script>
 </body>
 </html>

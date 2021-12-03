@@ -1,10 +1,18 @@
 {% extends "client/wrapper.html" %}
-
+{% load my_filter %}
+{% load mathfilters %}
 {% load static %}
-
+<!--NEW-->
 {% block title %}Website title - bootstrap html template{% endblock %}
 
+{% block meta %}
+    <link rel="stylesheet" href="{% static 'mainApp/css/stars.css' %}">
+{% endblock %}
+
 {% block content %}
+<style>
+
+</style>
 <section class="py-3 bg-light">
   <div class="container">
     <ol class="breadcrumb">
@@ -24,12 +32,12 @@
 		<aside class="col-md-6">
 <div class="card">
 <article class="gallery-wrap"> 
-	<div class="img-big-wrap">
-	  <div> <a href="#"><img src="{{getDiscountInfo.images.first.image.url}}"></a></div>
+	<div>
+	  <div class="wrapper padded-container"> <a href="#"><img id="mainPhoto" src="{{getDiscountInfo.images.first.image.url}}"  class="img centered"></a></div>
 	</div> <!-- slider-product.// -->
 	<div class="thumbs-wrap">
     {% for image in getDiscountInfo.images.all %}
-	  <a href="#" class="item-thumb"> <img src="{{image.image.url}}"></a>
+	  <div class="item-thumb images"> <img onclick="changePhoto(this.src)" src="{{image.image.url}}" height="100%"></div>
     {% endfor %}
 	</div> <!-- slider-nav.// -->
 </article> <!-- gallery-wrap .end// -->
@@ -41,20 +49,21 @@
 <h2 class="title mt-3">{{getDiscountInfo.name}}</h2>
 
 <div class="rating-wrap my-3">
-	<ul class="rating-stars">
-		<li style="width:80%" class="stars-active"> 
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-			<i class="fa fa-star"></i> 
-		</li>
-		<li>
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-			<i class="fa fa-star"></i> 
-		</li>
-	</ul>
-	<small class="label-rating text-muted"><i class="fa fa-eye"></i> {{getDiscountInfo.watch}} просмотров</small>
+    <ul class="rating-stars">
+        <li style="display: inline;">
+            {% for star in rating|create_range %}
+                <i style="color: orange" class="fa fa-star"></i>
+            {% endfor %}
+        </li>
+        <li style="display: inline;">
+            {% for star in rating|star_space %}
+                <i class="fa fa-star"></i>
+            {% endfor %}
+        </li>
+    </ul>
+    <small class="label-rating text-muted"><i class="fa fa-eye"></i> {{getDiscountInfo.watch}} просмотров</small>
 </div> <!-- rating-wrap.// -->
+
 
 <div class="mb-3"> 
 	<var class="price h4">Размер скидки: {{getDiscountInfo.discount}}%</var> 
@@ -89,6 +98,20 @@
 
   <dt class="col-sm-3">Действует до:</dt>
   <dd class="col-sm-9">{{getDiscountInfo.date_of_finish}}</dd>
+  {% if getDiscountInfo.partner.instagram != '' %}
+  <dt class="col-sm-3" style="font-size: 1.5rem;"><i class="fab fa-instagram"></i></dt>
+  <dd class="col-sm-9"><a href="{{getDiscountInfo.partner.instagram}}">{{getDiscountInfo.partner.instagram}}</a></dd>
+  {% endif %}
+
+  {% if getDiscountInfo.partner.facebook != '' %}
+  <dt class="col-sm-3" style="font-size: 1.5rem;"><i class="fab fa-facebook"></i></dt>
+  <dd class="col-sm-9"><a href="{{getDiscountInfo.partner.facebook}}">{{getDiscountInfo.partner.facebook}}</a></dd>
+  {% endif %}
+
+  {% if getDiscountInfo.partner.linkedin != '' %}
+  <dt class="col-sm-3" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></dt>
+  <dd class="col-sm-9"><a href="{{getDiscountInfo.partner.linkedin}}">{{getDiscountInfo.partner.linkedin}}</a></dd>
+  {% endif %}
 </dl>
 <br><br>
 {% if getDiscountInfo.products.all.count > 0 %}
@@ -102,7 +125,7 @@
 </div> <!-- col.// -->
 {% endif %}
 
-{% if request.user.can_use == True %}
+{% if request.user.can_use == True and can_show == True %}
 <div class="row">
 	<div class="form-row  mt-4">
 		<div class="form-group col-md">
@@ -124,13 +147,124 @@
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="success_div"></div>
+        <div id="error_div"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ========================= SECTION  ========================= -->
+{% if request.user.is_authenticated %}
 <section class="section-name padding-y bg">
 <div class="container">
-
+    <form method="post" name="rating" id="comment-form" action="{% url 'add_comment' %}">
+        {% csrf_token %}
+        <h2>Оставьте отзыв</h2>
+        <input id="discount-inf" type="hidden" value="{{ getDiscountInfo.id }}" name="discount">
+        <input type="hidden" name="star_rating" value="0" id="id_star_rating">
+        {% if rating_status %}
+        <p><span class="rating">
+            <input type="radio" id="rating5" name="rating" value="5" onclick="changeClass(this.id)">
+            <label id="5" for="rating5">5</label>
+        <input type="radio" id="rating4" name="rating" value="4" onclick="changeClass(this.id)">
+            <label id="4" for="rating4">4</label>
+        <input type="radio" id="rating3" name="rating" value="3" onclick="changeClass(this.id)">
+            <label id="3" for="rating3">3</label>
+        <input type="radio" id="rating2" name="rating" value="2" onclick="changeClass(this.id)">
+            <label id="2" for="rating2">2</label>
+        <input type="radio" id="rating1" name="rating" value="1" onclick="changeClass(this.id)">
+            <label id="1" for="rating1">1</label>
+        </span></p>
+        {% endif %}
+        <p>{{ form.text }}</p>
+        <input type="submit" onclick="hide()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    </form>
+    <br><br>
+    {% for comment in commetaries %}
+        <div style="border: 1px solid black; margin-bottom:5px">
+            <div><b>{{ comment.user.phone }}</b></div>
+            {% if comment.rating != 0 %}
+            <div class="rating-wrap my-3">
+                <ul class="rating-stars">
+                    <li style="display: inline;">
+                        {% for star in comment.rating|create_range %}
+                        <i style="color: orange" class="fa fa-star"></i>
+                        {% endfor %}
+                    </li>
+                    <li style="display: inline;">
+                        {% for star in comment.rating|star_space %}
+                        <i class="fa fa-star"></i>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </div> <!-- rating-wrap.// -->
+            {% endif %}
+            <div style="border-top: 1px solid black">{{ comment.text }}</div>
+        </div>
+    {% endfor %}
 </div> <!-- container .//  -->
 </section>
+{% endif %}
 <!-- ========================= SECTION CONTENT END// ========================= -->
+    <script src="{% static 'mainApp/js/main.js' %}"></script>
+
+<script type="text/javascript">
+  function changePhoto(url) {
+    var imagesEl = document.querySelector('#mainPhoto')
+    imagesEl.src = url
+    console.log('url')
+  }
+
+  var mass = []
+
+  function hide(){
+      var stars = document.querySelector('.rating')
+      stars.classList.add('hidden-all')
+  }
+
+
+  function changeClass(elem){
+    var el = document.getElementById(elem)
+    console.log('chosen' + elem)
+    mass.push(el.getAttribute('value'))
+    console.log(mass[mass.length - 1])
+    var  star_rating = document.getElementById('id_star_rating')
+    star_rating.setAttribute('value', mass[mass.length - 1])
+  }
+
+    $(document).ready(function() {
+    $('#comment-form').submit(function() { // On form submit event
+        $.ajax({ // create an AJAX call...
+            data: $(this).serialize(), // get the form data
+            type: $(this).attr('method'), // GET or POST
+            url: $(this).attr('action'), // the file to call
+            success: function(response) { // on success..
+                $('#success_div').html(response.result); // update the DIV
+            },
+            error: function(e, x, r) { // on error..
+                $('#error_div').html(e); // update the DIV
+            }
+        });
+        return false;
+    });
+});
+
+</script>
 
 {% endblock %}
 

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0b025381-2bcd-4654-b473-5eb63e658f0a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/discode/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/discode/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discode/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/discode/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/templates/client/info.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/templates/client/info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/templates/client/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/templates/client/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/templates/client/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/templates/client/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/templates/client/wrapper.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/templates/client/wrapper.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1sRidIu2Ec3jrANrH1QC2xOhy1u" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/mainFiles/rogo" />
+  </component>
+  <component name="RunManager">
+    <configuration name="discode" type="Python.DjangoServer" factoryName="Django server">
+      <module name="discode" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b025381-2bcd-4654-b473-5eb63e658f0a" name="Default Changelist" comment="" />
+      <created>1620841888719</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620841888719</updated>
+      <workItem from="1620841890754" duration="5767000" />
+      <workItem from="1621011784268" duration="7464000" />
+      <workItem from="1621088808289" duration="2118000" />
+      <workItem from="1621097884177" duration="5449000" />
+      <workItem from="1621175213079" duration="19411000" />
+      <workItem from="1621267273411" duration="7553000" />
+      <workItem from="1621357139237" duration="6085000" />
+      <workItem from="1621442830775" duration="4410000" />
+      <workItem from="1621536908520" duration="3291000" />
+      <workItem from="1624304913930" duration="36000" />
+      <workItem from="1638568586968" duration="25000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
